@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int part(int *a,int l,int r)
+{
+    int i,j,k;
+    int pi=a[r];
+    int id=l-1;
+    for(i=l;i<r;i++)
+    {
+        if(a[i]<=pi)
+        {
+            id++;
+            swap(a[i],a[id]);
+        }
+    }
+    swap(a[id+1],a[r]);
+
+    return id+1;
+}
+int r_part(int *a,int l,int r)
+{
+    int id=l+rand()%(r-l+1);
+    swap(a[id],a[r]);
+    return part(a,l,r);
+}
+void quick(int *a,int l,int r)
+{
+    int q;
+    if(l<r)
+    {
+        q=r_part(a,l,r);
+        quick(a,l,q-1);
+        quick(a,q+1,r);
+    }
+}
+int main()
+{
+    int n,i,j,k,l;
+    cout<<"No of elements"<<endl;
+    cin>>n;
+    int a[n];
+    cout<<"Initial array Elements"<<endl;
+    for(i=0;i<n;i++) cin>>a[i];
+
+    quick(a,0,n-1);
+
+      cout<<"Sorted array Elements"<<endl;
+    for(i=0;i<n;i++)
+    {
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
+    return 0;
+}
