@@ -2,6 +2,7 @@
 using namespace std;
 vector<int>adj[100];
 bool vis[100];
+int cost[100];
 void bfs(int s)
 {
     vis[s]=1;
@@ -17,6 +18,7 @@ void bfs(int s)
        if(vis[v]==0)
        {
            vis[v]=1;
+           cost[v]=cost[k]+1;
            q.push(v);
        }
     }
@@ -26,10 +28,10 @@ void bfs(int s)
 int main()
 {
 
-    int n,e,u,v,i,j,s;
-    cin>>n>>e;
+    int n,e,u,v,i,j,s,m;
+        cin>>n>>m;
 
-    for(i=0;i<n;i++)
+    for(i=0;i<m;i++)
     {
         cin>>u>>v;
         adj[u].push_back(v);
@@ -37,11 +39,14 @@ int main()
     }
 
     for(i=0;i<n;i++)vis[i]=0;
-    bfs(1);
+    for(i=0;i<n;i++)cost[i]=0;
+
     cin>>s;
+    bfs(s);
+    cout<<"Cost to visit from the source node"<<endl;
     for(i=1;i<=n;i++)
     {
-        cout<<vis[i]<<" ";
+        cout<<i<<" "<<cost[i]<<" "<<endl;
     }
 
         return 0;
